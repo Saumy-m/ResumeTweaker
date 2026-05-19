@@ -7,12 +7,12 @@
 </head>
 <body>
     <h1>Resume Tweaker</h1>
-    <form>
+    <form method="post" enctype="multipart/form-data">
         <label for="job-descript">Job Description:</label>
-        <input type="text" id="job-descript" name="job-descript" required>
+        <input type="text" id="job-descript" name="job_descript" required>
         
         <label for="fileInput">File Input:</label>
-        <input type="file" id="fileInput" name="fileInput" accept=".pdf,.docx" required>
+        <input type="file" id="fileInput" name="file_Input" accept=".pdf,.docx" required>
         
         <button type="submit">Submit</button>
     </form>

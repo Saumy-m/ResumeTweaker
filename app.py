@@ -1,17 +1,31 @@
-#imports go below
-import os # importing os module to fetch file paths
-from flask import Flask, render_template, request # importing necessary functions from flask module
+# Imports go here
+from fastapi import FastAPI, Request, Form, UploadFile, File
+from fastapi.responses import HTMLResponse
+from fastapi.templating import Jinja2Templates
 
-app = Flask(__name__) # creating a Flask application instance
+import os
+import python_multipart
 
-# homepage route
-@app.route('/', methods=['GET', 'POST'])
-def home():
-    if request.method == 'POST': # checking if the request method is POST
-        name = request.form['job-descript'] 
-        return "Successful!" # returns the job description
+# Initialize the FastAPI instance
+app = FastAPI()
+
+# Initialize the Jinja2 templates
+templates = Jinja2Templates(directory="templates")
+
+# Define a route for the home page
+@app.get("/", response_class=HTMLResponse)
+async def read_root(request: Request):
+    return templates.TemplateResponse(request=request, name="index.html", context={"status": "Success"})
+
+# Define a route to handle form submission
+@app.post("/", response_class=HTMLResponse)
+async def submit_form(request: Request, job_descript: str = Form(...), file_Input: UploadFile = File(...)):
+    # Process the uploaded file (for demonstration, we just read its content)
+    file_content = await file_Input.read()
     
-    return render_template('index.html') # rendering index.html template 
+    print("\n--- FASTAPI LOGS ---")
+    print(f"Captured text length: {len(job_descript)} chars")
+    print(f"Captured file name: {file_Input.filename}")
+    print("--------------------\n")
 
-if __name__ == '__main__': # checking if the script is run directly
-    app.run(debug=True, port=5000) # running the Flask application in debug mode
+    return "Form submitted successfully!"
