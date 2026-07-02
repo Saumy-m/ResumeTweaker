@@ -4,15 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resume Tweaker</title>
+    <link rel="stylesheet" href="static\css\global.css">
 </head>
 <body>
     <h1>Resume Tweaker</h1>
     <form>
-        <label for="job-descript">Job Description:</label>
-        <input type="text" id="job-descript" name="job-descript" required>
+        <label className="labels" for="job-descript">Job Description:</label>
+        <br>
+        <br>
+        <!-- <input type="text" id="job-descript" name="job-descript" required> -->
+        <textarea id="job-descript" name="job-descript" rows="5" cols="40" required></textarea>
+
+        <br>
+        <br>
         
-        <label for="fileInput">File Input:</label>
+        <label className="labels" for="fileInput">File Input:</label>
         <input type="file" id="fileInput" name="fileInput" accept=".pdf,.docx" required>
+        <br><br>
         
         <button type="submit">Submit</button>
     </form>
